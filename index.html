@@ -17,6 +17,9 @@
       - call:
         - append: $h1
         - text: Bio Materials Workshop
+    - call: 
+      - append: $h3
+      - text: Discussions
     - call:
       - append: $ul.list-group
       - selectAll: li.list-group-item
@@ -30,7 +33,20 @@
         - attr:
             href: '@url'
         - text: '@title'
-
+    - call: 
+      - append: $div.panel.panel-default
+      - call: 
+        - append: $div.panel.panel-heading
+        - call:
+          - append: h4
+          - append: $a#schedule
+          - text: Workshop Schedule
+      - call: 
+        - requests: 
+            s.text: schedule.html
+            call:
+            - append: $div.panel.panel-body#schedule
+            - html: :d3.requests.s
         
     </script>
 
