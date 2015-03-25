@@ -1,0 +1,57 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* Deploy */
+      @import "//cdn.jsdelivr.net/g/bootstrap(css/bootstrap.min.css)";      
+    </style>
+  </head>
+  <body>
+    <script id="layout" type="text/yaml">
+    build:
+    - append: $div.container
+    - call:
+      - append: $div.jumbotron
+      - call:
+        - append: $h1
+        - text: Bio Materials Workshop
+    - call:
+      - append: $ul.list-group
+      - selectAll: li.list-group-item
+      - data:
+        - url: test.html
+          title: Test discussion
+      - call:
+        - enter:
+        - append: $li.list-group-item
+        - append: a
+        - attr:
+            href: '@url'
+        - text: '@title'
+
+        
+    </script>
+
+    <!-- Deploy -->
+    <script src="//cdn.jsdelivr.net/g/d3js,jquery,bootstrap">
+      </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/js-yaml/3.2.7/js-yaml.min.js">
+      </script>
+        
+    <script src="{{site.baseurl}}/js/d3.ml.js">
+      </script>
+
+
+    <script>
+      ;( function(){
+        d3.select('body')
+          .template( 
+            jsyaml.load( d3.select('#layout').html() )['build']
+          )
+      })();
+    </script>
+  </body>
+</html>
